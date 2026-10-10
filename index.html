@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="mr"><head><meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="theme-color" content="#e3e8ee"/>
+<link rel="manifest" href='data:application/json,{"name":"Kirana Bill","short_name":"Kirana","start_url":".","display":"standalone","background_color":"#F7F8F3","theme_color":"#14532D","icons":[{"src":"data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect width=%27100%27 height=%27100%27 rx=%2722%27 fill=%27%2314532D%27/%3E%3Ctext x=%2750%27 y=%2766%27 font-size=%2756%27 text-anchor=%27middle%27 fill=%27%23F2B705%27%3E%E0%A4%95%3C/text%3E%3C/svg%3E","sizes":"512x512","type":"image/svg+xml","purpose":"any"}]}'/>
+<title>Kirana Bill</title>
+<link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--ink:#2b3a33;--g:#1b7a45;--g2:#25a05c;--haldi:#f2b705;--bg:#e3e8ee;--card:#e3e8ee;--line:#cfd6df;--mut:#6b7a72;--red:#c0392b;--amber:#fff1c2;--hi:#fff;--lo:#a9b4c2;--r:18px;
+--up:8px 8px 18px var(--lo),-8px -8px 18px var(--hi);--up-s:4px 4px 9px var(--lo),-4px -4px 9px var(--hi);--dn:inset 5px 5px 10px var(--lo),inset -5px -5px 10px var(--hi)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--ink:#e6efe9;--bg:#22272d;--card:#22272d;--line:#333a42;--mut:#9fb0a6;--amber:#3c3411;--g:#34c070;--hi:#2d343b;--lo:#15181c}}
+:root[data-theme=dark]{--ink:#e6efe9;--bg:#22272d;--card:#22272d;--line:#333a42;--mut:#9fb0a6;--amber:#3c3411;--g:#34c070;--hi:#2d343b;--lo:#15181c}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+body{font-family:Mukta,'Noto Sans Devanagari',system-ui,sans-serif;background:var(--bg);color:var(--ink);padding:env(safe-area-inset-top) 0 calc(86px + env(safe-area-inset-bottom));transition:background .4s,color .4s}
+header{display:flex;align-items:center;gap:10px;padding:10px 14px;margin:10px 12px;border-radius:var(--r);background:var(--bg);color:var(--ink);position:sticky;top:8px;z-index:5;box-shadow:var(--up);animation:drop .6s cubic-bezier(.2,.9,.3,1.2) both}
+header img{width:38px;height:38px;border-radius:12px;object-fit:cover;background:var(--bg);box-shadow:var(--up-s)}header b{flex:1;font-size:19px;font-weight:800;color:var(--g);text-shadow:1px 1px 0 var(--hi)}
+main{padding:12px;max-width:760px;margin:auto;perspective:1000px}
+.card{background:linear-gradient(145deg,var(--hi),var(--bg) 40%);border:0;border-radius:var(--r);padding:16px;margin-bottom:18px;box-shadow:var(--up);animation:rise .55s cubic-bezier(.2,.8,.2,1) both;transform-origin:50% 100%;transition:transform .3s,box-shadow .3s}
+.card:hover{transform:translateY(-3px) rotateX(1.5deg)}main>.card:nth-child(2){animation-delay:.07s}main>.card:nth-child(3){animation-delay:.14s}main>.card:nth-child(4){animation-delay:.21s}main>.card:nth-child(n+5){animation-delay:.28s}
+input,select{width:100%;padding:12px 14px;border:0;border-radius:14px;font:inherit;background:var(--bg);color:var(--ink);margin:5px 0;box-shadow:var(--dn);outline:0;transition:box-shadow .25s}
+input:focus,select:focus{box-shadow:var(--dn),0 0 0 2px var(--g2)}
+button{font:inherit;font-weight:700;padding:11px 18px;border:0;border-radius:14px;background:linear-gradient(145deg,var(--g2),var(--g));color:#fff;box-shadow:var(--up-s),inset 1px 1px 2px rgba(255,255,255,.35);transition:transform .15s,box-shadow .15s,filter .2s;position:relative;overflow:hidden;cursor:pointer}
+button:hover{filter:brightness(1.08);transform:translateY(-2px)}button:active{transform:translateY(1px) scale(.97);box-shadow:inset 3px 3px 7px rgba(0,0,0,.3),inset -2px -2px 5px rgba(255,255,255,.2)}
+button.alt{background:linear-gradient(145deg,#ffd23f,var(--haldi));color:#2b2100}button.ghost{background:var(--bg);color:var(--g);border:0;box-shadow:var(--up-s)}button.ghost:active{box-shadow:var(--dn)}button:disabled{opacity:.45;pointer-events:none}
+.row{display:flex;gap:10px;align-items:center}.row>*{flex:1}.row>.s{flex:0 0 auto}.mut{color:var(--mut);font-size:13px}
+.alert{background:var(--amber);padding:10px 14px;border-radius:14px;margin-bottom:12px;font-size:14px;box-shadow:var(--dn);animation:pulse 2.4s ease-in-out infinite}.bad{color:var(--red);font-weight:800}
+nav{position:fixed;bottom:calc(8px + env(safe-area-inset-bottom));left:10px;right:10px;display:flex;gap:6px;background:var(--bg);border-radius:22px;padding:8px;box-shadow:var(--up);z-index:6;max-width:760px;margin:auto;animation:rise .7s .2s both}
+nav button{flex:1;background:var(--bg);color:var(--mut);padding:11px 2px;font-size:13px;box-shadow:none}nav button:hover{transform:none}
+nav button.on{color:var(--g);box-shadow:var(--dn);animation:pop .35s}
+.line{display:grid;grid-template-columns:1fr 70px 80px 70px 28px;gap:6px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px;animation:rise .35s both}.line input{padding:7px;margin:0}
+.pick{display:flex;justify-content:space-between;padding:12px;margin:6px 0;border-radius:14px;background:var(--bg);box-shadow:var(--up-s);transition:transform .15s,box-shadow .15s}.pick:active{box-shadow:var(--dn);transform:scale(.98)}
+#toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:var(--bg);color:var(--ink);padding:12px 20px;border-radius:22px;z-index:20;max-width:90%;display:none;box-shadow:var(--up);font-weight:600;animation:pop .4s}
+#ov{position:fixed;inset:0;background:var(--bg);z-index:30;display:none;overflow:auto;padding:16px;animation:fade .3s}#rc{max-width:380px;margin:auto;background:#fff;color:#000;padding:14px;font-size:14px;border-radius:6px;box-shadow:var(--up)}#rc table{width:100%;border-collapse:collapse}#rc td{padding:2px 0}
+#th,#net{position:fixed;z-index:8;top:calc(14px + env(safe-area-inset-top));font-size:12px}#th{right:22px;width:38px;height:38px;padding:0;border-radius:50%;font-size:18px;top:calc(18px + env(safe-area-inset-top));background:var(--bg);box-shadow:var(--up-s)}
+#net{left:50%;transform:translateX(-50%);padding:3px 12px;border-radius:12px;background:var(--bg);box-shadow:var(--up-s);color:var(--g);font-weight:700;top:calc(2px + env(safe-area-inset-top));transition:.3s}#net.off{color:var(--red)}
+.rip{position:absolute;border-radius:50%;background:rgba(255,255,255,.5);transform:scale(0);animation:rp .6s linear;pointer-events:none}
+@keyframes rise{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}@keyframes drop{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:none}}
+@keyframes pop{0%{transform:translateX(var(--tx,0)) scale(.8)}60%{transform:translateX(var(--tx,0)) scale(1.06)}100%{transform:translateX(var(--tx,0)) scale(1)}}@keyframes fade{from{opacity:0}}@keyframes rp{to{transform:scale(4);opacity:0}}
+@keyframes pulse{50%{box-shadow:var(--dn),0 0 0 3px rgba(242,183,5,.35)}}
+#toast{--tx:-50%}@media(prefers-reduced-motion:reduce){*,*:before{animation:none!important;transition:none!important}}
+@media print{body>*:not(#ov){display:none!important}#ov{display:block;position:static;padding:0}.noprint{display:none}}
+</style></head><body>
+<div id="app"></div><div id="toast"></div><div id="ov"></div>
+<script type="module">
+import{initializeApp,deleteApp}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import{getAuth,signInWithEmailAndPassword,signOut,onAuthStateChanged,setPersistence,browserLocalPersistence,createUserWithEmailAndPassword}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import{initializeFirestore,doc,getDoc,setDoc,addDoc,updateDoc,collection,query,where,orderBy,onSnapshot,writeBatch,limit,increment,persistentLocalCache,persistentMultipleTabManager}from"https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+// ── Firebase config (kirana-35ec6) ──
+const cfg={apiKey:"AIzaSyCY-rawh0uXeikfUK7b50FO8BxnhvMzGaM",authDomain:"kirana-35ec6.firebaseapp.com",projectId:"kirana-35ec6",storageBucket:"kirana-35ec6.firebasestorage.app",messagingSenderId:"782675388251",appId:"1:782675388251:web:d8636603092c399be75c7e"};
+const APP_VERSION=215; // = line count of this file (auto-set by build step)
+const fb=initializeApp(cfg),auth=getAuth(fb);
+const db=initializeFirestore(fb,{localCache:persistentLocalCache({tabManager:persistentMultipleTabManager()})});
+setPersistence(auth,browserLocalPersistence).catch(()=>{});
+
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const num=v=>parseFloat(v)||0,rs=v=>'₹'+(Math.round(v*100)/100);
+let lang=localStorage.lang||'mr';
+const D={login:['लॉगिन','Login'],email:['ईमेल','Email'],pw:['पासवर्ड','Password'],bill:['बिल','Bill'],items:['माल','Items'],udhaar:['उधार','Udhaar'],rep:['रिपोर्ट','Reports'],set:['सेटिंग','Settings'],stores:['दुकाने','Stores'],
+scan:['बारकोड स्कॅन / नाव शोधा','Scan barcode / search item'],cust:['ग्राहकाचे नाव','Customer name'],phone:['फोन','Phone'],addr:['पत्ता','Address'],charge:['जादा खर्च','Extra charge'],label:['तपशील (पॅकिंग इ.)','Label (packing etc.)'],amt:['रक्कम','Amount'],add:['जोडा','Add'],total:['एकूण','Total'],paid:['मिळाले','Paid'],due:['उधार','Due'],save:['बिल जतन करा','Save bill'],print:['प्रिंट','Print'],close:['बंद','Close'],
+name:['नाव','Name'],unit:['एकक (kg/नग)','Unit (kg/pcs)'],price:['विक्री किंमत','Sell price'],cost:['खरेदी किंमत','Cost'],stock:['साठा','Stock'],min:['किमान साठा','Min stock'],pos:['क्रम','Pos'],barcode:['बारकोड/SKU','Barcode/SKU'],low:['साठा कमी:','Low stock:'],
+queued:['जतन केले — नेट आल्यावर sync होईल','Saved — will sync when online'],ok:['✅ झाले','✅ Done'],search:['नाव/फोन शोधा','Search name/phone'],recv:['पैसे मिळाले','Receive payment'],over:['३० दिवसांहून जुना उधार','Due older than 30 days'],limit:['उधार मर्यादा ओलांडली','Credit limit exceeded'],
+shop:['दुकान','Shop'],staff:['शिपाई जोडा','Add shopkeeper'],logout:['बाहेर पडा','Logout'],from:['पासून','From'],to:['पर्यंत','To'],csv:['CSV डाउनलोड','Download CSV'],sales:['विक्री','Sales'],bills:['बिले','Bills'],tname:['दुकानाचे नाव','Store name'],oname:['मालकाचे नाव','Owner name'],logo:['लोगो','Logo'],newst:['नवीन दुकान (टेनंट)','New store (tenant)'],upd:['नवीन आवृत्ती उपलब्ध — अपडेट करा','New version — please update'],reload:['रीलोड','Reload'],off:['हे दुकान बंद आहे','This store is disabled'],edit:['बदला','Edit'],addstock:['साठा जोडा','Add stock'],credit:['उधार मर्यादा ₹','Credit limit ₹'],minv:['किमान आवृत्ती','Min version']};
+const t=k=>(D[k]||[k,k])[lang=='mr'?0:1];
+const S={u:null,tid:null,ten:null,prods:[],custs:[],bills:[],cart:[],chg:[],tab:'bill',un:[],cust:{name:'',phone:'',addr:''},paid:null,tenants:[],from:'',to:''};
+const toast=m=>{const e=$('#toast');e.textContent=m;e.style.display='block';clearTimeout(toast.h);toast.h=setTimeout(()=>e.style.display='none',3200)};
+const withTimeout=(p,ms=8000)=>Promise.race([p,new Promise((_,r)=>setTimeout(()=>r(new Error('timeout')),ms))]);
+// Firestore writes queue offline and only resolve on server ack → never hang the UI.
+async function W(p){if(!navigator.onLine){p.catch(()=>{});toast(t('queued'));return}try{await withTimeout(p,8000);toast(t('ok'))}catch(e){if(e.message=='timeout'){toast(t('queued'));return}throw e}}
+const busy={};async function once(k,f){if(busy[k])return;busy[k]=1;try{return await f()}catch(e){toast('⚠ '+e.message)}finally{busy[k]=0}}
+const tc=n=>collection(db,'tenants',S.tid,n),td=(n,i)=>doc(db,'tenants',S.tid,n,i);
+const dev=(localStorage.dev=localStorage.dev||Math.random().toString(36).slice(2,6).toUpperCase());
+function invNo(){const d=new Date(),n=(+localStorage.seq||0)+1;localStorage.seq=n;return`${String(d.getFullYear()).slice(2)}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}-${dev}-${n}`}
+window.addEventListener('error',e=>toast('⚠ '+e.message));
+
+// ── AUTH (never sign out on network failure) ──
+onAuthStateChanged(auth,async u=>{
+  stop();if(!u){S.u=null;return loginView()}
+  let p=null;
+  try{const s=await withTimeout(getDoc(doc(db,'users',u.uid)),9000);if(!s.exists()){toast('Profile not found');await signOut(auth);return}p=s.data();localStorage['p_'+u.uid]=JSON.stringify(p)}
+  catch(e){const c=localStorage['p_'+u.uid];if(c)p=JSON.parse(c);else return loginView('Internet needed for first login / पहिल्या लॉगिनसाठी नेट हवे')}
+  S.u={uid:u.uid,...p};S.tid=p.tenantId||null;start()});
+function stop(){S.un.forEach(f=>f());S.un=[]}
+function start(){
+  const u=S.u;S.tab=u.role=='super'?'tenants':'bill';
+  S.un.push(onSnapshot(doc(db,'settings','appConfig'),s=>{const m=s.data()?.minVersion||0;if(!s.metadata.fromCache&&navigator.onLine&&m>APP_VERSION)verGate()},()=>{}));
+  if(u.role=='super'){S.un.push(onSnapshot(collection(db,'tenants'),s=>{S.tenants=s.docs.map(d=>({id:d.id,...d.data()}));paint()},e=>toast(e.message)));return paint()}
+  S.un.push(onSnapshot(doc(db,'tenants',S.tid),s=>{S.ten={id:s.id,...s.data()};paint()}));
+  S.un.push(onSnapshot(tc('products'),s=>{S.prods=s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(a.order||0)-(b.order||0));paint(1)}));
+  S.un.push(onSnapshot(tc('customers'),s=>{S.custs=s.docs.map(d=>({id:d.id,...d.data()}));paint(1)}));
+  const bq=u.role=='owner'?query(tc('bills'),orderBy('ts','desc'),limit(400)):query(tc('bills'),where('shopId','==',u.shopId||''),limit(400));
+  S.un.push(onSnapshot(bq,s=>{S.bills=s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>b.ts-a.ts);paint(1)},e=>toast(e.message)));
+}
+function verGate(){const o=$('#ov');o.style.display='block';o.innerHTML=`<div class="card"><p>${t('upd')}</p><br><button onclick="location.reload()">${t('reload')}</button></div>`}
+const feat=k=>S.u?.role=='super'||S.ten?.features?.[k]!==false;
+window.setLang=()=>{lang=lang=='mr'?'en':'mr';localStorage.lang=lang;paint()};
+window.out=()=>signOut(auth);
+function loginView(msg=''){$('#app').innerHTML=`<main><div class="card" style="margin-top:12vh"><h2 style="margin-bottom:8px">किराणा बिल · Kirana Bill</h2><p class="bad">${esc(msg)}</p><input id=em type=email placeholder="${t('email')}"><input id=pwd type=password placeholder="${t('pw')}"><br><button id=lg style="width:100%">${t('login')}</button><br><br><button class=ghost onclick="setLang()">मराठी / English</button></div></main>`;
+  $('#lg').onclick=()=>once('lg',async()=>{await signInWithEmailAndPassword(auth,$('#em').value.trim(),$('#pwd').value)})}
+
+// ── SHELL ──
+function tabs(){const r=S.u.role;return r=='super'?[['tenants','stores']]:r=='owner'?[['bill','bill'],['items','items'],['udhaar','udhaar'],['rep','rep'],['set','set']]:[['bill','bill'],['udhaar','udhaar'],['rep','bills']]}
+window.go=k=>{S.tab=k;paint()};
+function paint(soft){
+  if(!S.u)return;if(S.u.role!='super'&&!S.ten)return;
+  if(soft&&['bill','items'].includes(S.tab)&&document.activeElement?.tagName=='INPUT'&&S.tab=='items')return;
+  if(S.ten&&S.ten.active===false&&S.u.role!='super'){$('#app').innerHTML=`<main><div class=card>${t('off')}<br><br><button onclick="out()">${t('logout')}</button></div></main>`;return}
+  const logo=S.ten?.logo?`<img src="${S.ten.logo}">`:'';
+  $('#app').innerHTML=`<header>${logo}<b>${esc(S.ten?.name||'Kirana Admin')}</b><button class=alt onclick="setLang()">${lang=='mr'?'EN':'मर'}</button><button class=ghost style="color:#fff;border-color:#fff" onclick="out()">⎋</button></header><main id=m></main><nav>${tabs().map(([k,l])=>`<button class="${S.tab==k?'on':''}" onclick="go('${k}')">${t(l)}</button>`).join('')}</nav>`;
+  ({tenants:vTenants,bill:vBill,items:vItems,udhaar:vUdhaar,rep:vRep,set:vSet})[S.tab]()}
+const lowList=()=>S.prods.filter(p=>p.track!==false&&num(p.stock)<=num(p.min)&&p.active!==false);
+
+// ── BILLING ──
+function vBill(){const low=lowList();
+  $('#m').innerHTML=`${feat('stock')&&low.length?`<div class=alert>⚠ ${t('low')} ${low.slice(0,6).map(p=>esc(p.name)).join(', ')}${low.length>6?'…':''}</div>`:''}
+  <div class=card><div class=row><input id=q placeholder="${t('scan')}" autocomplete=off>${feat('barcode')&&'BarcodeDetector'in window?'<button class="s alt" onclick="cam()">📷</button>':''}</div><div id=pk></div></div>
+  <div class=card><div id=cart></div><div class=row style="margin-top:8px"><input id=cl placeholder="${t('label')}"><input id=ca type=number inputmode=decimal placeholder="${t('amt')}" style="max-width:100px"><button class="s ghost" onclick="addChg()">+</button></div></div>
+  <div class=card><input id=cn list=cnl placeholder="${t('cust')}" value="${esc(S.cust.name)}"><datalist id=cnl>${S.custs.map(c=>`<option value="${esc(c.name)}">${esc(c.phone||'')}`).join('')}</datalist><div class=row><input id=cp type=tel placeholder="${t('phone')}" value="${esc(S.cust.phone)}"><input id=cad placeholder="${t('addr')}" value="${esc(S.cust.addr)}"></div><div id=cinfo></div></div>
+  <div class=card><div id=tot></div><button id=sv style="width:100%;margin-top:8px" onclick="saveBill()">${t('save')}</button></div>`;
+  const q=$('#q');q.oninput=()=>{const v=q.value.trim().toLowerCase();$('#pk').innerHTML=v?S.prods.filter(p=>p.active!==false&&(p.name.toLowerCase().includes(v)||(p.code||'').toLowerCase()==v)).slice(0,8).map(p=>`<div class=pick onclick="addP('${p.id}')"><span>${esc(p.name)}</span><span>${rs(p.price)}/${esc(p.unit||'')} · ${p.track!==false?num(p.stock):'–'}</span></div>`).join(''):''};
+  q.onkeydown=e=>{if(e.key=='Enter'){const v=q.value.trim().toLowerCase(),p=S.prods.find(p=>(p.code||'').toLowerCase()==v);if(p){addP(p.id)}else if(document.querySelector('.pick'))document.querySelector('.pick').click()}};
+  const cn=$('#cn');cn.onchange=()=>{S.cust.name=cn.value;const c=S.custs.find(c=>c.name==cn.value);if(c){S.cust.phone=c.phone||'';S.cust.addr=c.addr||'';$('#cp').value=S.cust.phone;$('#cad').value=S.cust.addr}info()};
+  $('#cp').onchange=e=>{S.cust.phone=e.target.value;const c=S.custs.find(c=>c.phone&&c.phone==e.target.value);if(c){S.cust.name=c.name;cn.value=c.name;S.cust.addr=c.addr||'';$('#cad').value=S.cust.addr}info()};$('#cad').onchange=e=>S.cust.addr=e.target.value;
+  rc();info()}
+const cKey=()=>S.cust.phone||(S.cust.name?'n_'+S.cust.name.toLowerCase().replace(/\W+/g,'_'):'');
+function info(){const c=S.custs.find(c=>c.id==cKey()),e=$('#cinfo');if(!e)return;const lim=num(S.ten?.creditLimit)||5000;e.innerHTML=c&&num(c.due)>0&&feat('udhaar')?`<div class=alert>${t('due')}: <b>${rs(c.due)}</b>${num(c.due)>lim?' · '+t('limit'):''}</div>`:''}
+window.addP=id=>{const p=S.prods.find(p=>p.id==id),l=S.cart.find(l=>l.id==id);if(l)l.qty=num(l.qty)+1;else S.cart.push({id,name:p.name,unit:p.unit||'',qty:1,price:num(p.price),base:num(p.price),cost:num(p.cost),order:p.order||0,track:p.track!==false});const q=$('#q');q.value='';$('#pk').innerHTML='';rc();q.focus()};
+window.setL=(i,k,v)=>{S.cart[i][k]=num(v);rc()};window.rmL=i=>{S.cart.splice(i,1);rc()};
+window.addChg=()=>{const l=$('#cl').value.trim(),a=num($('#ca').value);if(!l||!a)return;S.chg.push({label:l,amt:a});rc()};window.rmC=i=>{S.chg.splice(i,1);rc()};
+const sub=()=>S.cart.reduce((s,l)=>s+num(l.qty)*num(l.price),0),tot=()=>sub()+S.chg.reduce((s,c)=>s+c.amt,0);
+function rc(){const e=$('#cart');if(!e)return;
+  e.innerHTML=S.cart.map((l,i)=>`<div class=line><span>${esc(l.name)}${l.price!=l.base?' ✎':''}<br><span class=mut>${esc(l.unit)}${feat('stock')&&l.track&&num(l.qty)>num((S.prods.find(p=>p.id==l.id)||{}).stock)?' <b class=bad>⚠ stock</b>':''}</span></span><input type=number inputmode=decimal step=any value="${l.qty}" onchange="setL(${i},'qty',this.value)"><input type=number inputmode=decimal value="${l.price}" onchange="setL(${i},'price',this.value)"><b>${rs(l.qty*l.price)}</b><span></span><button class=ghost style="padding:2px 6px" onclick="rmL(${i})">✕</button></div>`).join('')+S.chg.map((c,i)=>`<div class=line style="grid-template-columns:1fr 80px 28px"><span>${esc(c.label)}</span><b>${rs(c.amt)}</b><button class=ghost style="padding:2px 6px" onclick="rmC(${i})">✕</button></div>`).join('');
+  const T=tot(),pd=S.paid==null?T:S.paid;$('#tot').innerHTML=`<div class=row><b style="font-size:22px">${t('total')}: ${rs(T)}</b></div>${feat('udhaar')?`<div class=row><span>${t('paid')}</span><input id=pd type=number inputmode=decimal value="${pd}" onchange="S2.paid=num(this.value);rc()"><button class="s ghost" onclick="S2.paid=0;rc()">${t('udhaar')}</button></div><div class=${T-pd>0?'bad':'mut'}>${t('due')}: ${rs(Math.max(0,T-pd))}</div>`:''}`}
+window.S2=S;window.num=num;
+window.saveBill=()=>once('sv',async()=>{
+  if(!S.cart.length)return toast('—');const T=tot(),paid=feat('udhaar')?Math.min(T,S.paid==null?T:S.paid):T,due=T-paid,ck=cKey();
+  if(due>0&&!ck)return toast(t('cust'));
+  const sh=(S.ten.shops||[]).find(s=>s.id==S.u.shopId)||(S.ten.shops||[])[0]||{id:'main',name:S.ten.name};
+  const b={no:invNo(),ts:Date.now(),shopId:S.u.role=='owner'?(S.u.shopId||sh.id):S.u.shopId,shopName:sh.name,by:S.u.name||'',cust:{...S.cust,key:ck},items:S.cart.map(l=>({id:l.id,name:l.name,unit:l.unit,qty:num(l.qty),price:num(l.price),base:l.base,order:l.order})),charges:S.chg,total:T,paid,due};
+  const id=doc(tc('bills')).id,w=writeBatch(db);w.set(td('bills',id),b);
+  if(feat('stock'))S.cart.filter(l=>l.track).forEach(l=>w.update(td('products',l.id),{stock:increment(-num(l.qty))}));
+  if(ck)w.set(td('customers',ck),{name:S.cust.name||ck,phone:S.cust.phone,addr:S.cust.addr,due:increment(due),lastBill:b.ts,...(due>0?{lastDue:b.ts}:{})},{merge:true});
+  const p=w.commit();S.cart=[];S.chg=[];S.paid=null;S.cust={name:'',phone:'',addr:''};await W(p);b.id=id;showBill(b);paint()});
+window.cam=async()=>{try{const st=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}}),v=document.createElement('video');v.srcObject=st;v.setAttribute('playsinline','');await v.play();const o=$('#ov');o.style.display='block';o.innerHTML='<button class=alt onclick="stopCam()">✕</button>';o.appendChild(v);v.style.width='100%';const bd=new BarcodeDetector();window.stopCam=()=>{st.getTracks().forEach(x=>x.stop());o.style.display='none';clearInterval(h)};const h=setInterval(async()=>{const r=await bd.detect(v).catch(()=>[]);if(r[0]){const p=S.prods.find(p=>p.code==r[0].rawValue);stopCam();p?addP(p.id):toast(r[0].rawValue)}},400)}catch(e){toast(e.message)}};
+function showBill(b){const o=$('#ov'),T=S.ten,its=[...b.items].sort((a,c)=>(a.order||0)-(c.order||0));
+  o.style.display='block';o.innerHTML=`<div id=rc><div style="text-align:center">${T.logo?`<img src="${T.logo}" style="height:52px"><br>`:''}<b>${esc(T.name)}</b><br>${esc(T.address||'')} ${esc(T.phone||'')}</div><hr><div>#${b.no}<br>${new Date(b.ts).toLocaleString()}${b.cust?.name?`<br>${esc(b.cust.name)} ${esc(b.cust.phone||'')}`:''}</div><hr><table>${its.map(i=>`<tr><td>${esc(i.name)}<br>${i.qty} ${esc(i.unit)} × ${i.price}</td><td align=right>${rs(i.qty*i.price)}</td></tr>`).join('')}${b.charges.map(c=>`<tr><td>${esc(c.label)}</td><td align=right>${rs(c.amt)}</td></tr>`).join('')}</table><hr><b>${t('total')}: ${rs(b.total)}</b><br>${t('paid')}: ${rs(b.paid)}${b.due>0?`<br><b>${t('due')}: ${rs(b.due)}</b>`:''}</div>
+  <div class="row noprint" style="max-width:380px;margin:12px auto"><button onclick="print()">🖨 ${t('print')}</button><button class=alt onclick="wa('${b.id}')">WhatsApp</button><button class=ghost onclick="$('#ov').style.display='none'">${t('close')}</button></div>`;window._b=b}
+window.wa=()=>{const b=window._b,m=`*${S.ten.name}* #${b.no}\n${b.items.map(i=>`${i.name} ${i.qty}${i.unit}×${i.price}=${i.qty*i.price}`).join('\n')}\n${b.charges.map(c=>c.label+' '+c.amt).join('\n')}\n*${t('total')}: ${rs(b.total)}*${b.due>0?`\n${t('due')}: ${rs(b.due)}`:''}`;const ph=(b.cust?.phone||'').replace(/\D/g,'');open(`https://wa.me/${ph.length==10?'91'+ph:ph}?text=${encodeURIComponent(m)}`)};
+window.$=$;
+
+// ── ITEMS & STOCK (owner) ──
+let editId=null;
+function vItems(){const e=S.prods.find(p=>p.id==editId)||{};
+  $('#m').innerHTML=`<div class=card><input id=pn placeholder="${t('name')}" value="${esc(e.name||'')}"><div class=row><input id=pc placeholder="${t('barcode')}" value="${esc(e.code||'')}"><input id=pu placeholder="${t('unit')}" value="${esc(e.unit||'')}"></div><div class=row><input id=pp type=number inputmode=decimal placeholder="${t('price')}" value="${e.price??''}"><input id=pco type=number inputmode=decimal placeholder="${t('cost')}" value="${e.cost??''}"></div>${feat('stock')?`<div class=row><input id=ps type=number inputmode=decimal placeholder="${t('stock')}" value="${e.stock??''}"><input id=pm type=number inputmode=decimal placeholder="${t('min')}" value="${e.min??''}"></div>`:''}<button onclick="saveP()" style="width:100%">${editId?t('edit'):t('add')}</button></div>
+  <input id=iq placeholder="${t('search')}" oninput="fi(this.value)"><div class=card id=il></div>`;fi('')}
+window.fi=v=>{v=v.toLowerCase();$('#il').innerHTML=S.prods.filter(p=>p.name.toLowerCase().includes(v)||(p.code||'').includes(v)).map(p=>`<div class=pick style="gap:6px;align-items:center"><input type=number value="${p.order||0}" style="width:54px" title="${t('pos')}" onchange="setPos('${p.id}',this.value)"><span style="flex:1" onclick="editId='${p.id}';go('items')">${esc(p.name)}<br><span class=mut>${rs(p.price)}/${esc(p.unit||'')}</span></span>${feat('stock')?`<b class="${num(p.stock)<=num(p.min)?'bad':''}">${num(p.stock)}</b><button class="s alt" style="padding:4px 8px" onclick="addSt('${p.id}')">+</button>`:''}</div>`).join('')};
+window.editId=null;Object.defineProperty(window,'editId',{get:()=>editId,set:v=>editId=v});
+window.saveP=()=>once('sp',async()=>{const n=$('#pn').value.trim();if(!n)return;const d={name:n,code:$('#pc').value.trim(),unit:$('#pu').value.trim(),price:num($('#pp').value),cost:num($('#pco').value),active:true,track:true};if(feat('stock')){d.stock=num($('#ps').value);d.min=num($('#pm').value)}
+  const p=editId?updateDoc(td('products',editId),d):addDoc(tc('products'),{...d,order:S.prods.length+1});editId=null;await W(p);paint()});
+// Reorder: type a position; only docs whose order actually changed are written, in ONE batch.
+window.setPos=id=>0;window.setPos=(id,v)=>once('pos',async()=>{const a=S.prods.filter(p=>p.id!=id),m=S.prods.find(p=>p.id==id);a.splice(Math.max(0,Math.min(a.length,num(v)-1)),0,m);const w=writeBatch(db);let n=0;a.forEach((p,i)=>{if(p.order!=i+1){w.update(td('products',p.id),{order:i+1});n++}});if(n)await W(w.commit())});
+window.addSt=id=>{const q=num(prompt(t('addstock')));if(q)once('as',()=>W(updateDoc(td('products',id),{stock:increment(q)})))};
+
+// ── UDHAAR ──
+function vUdhaar(){$('#m').innerHTML=`<input placeholder="${t('search')}" oninput="fu(this.value)"><div class=card id=ul></div>`;fu('')}
+window.fu=v=>{v=v.toLowerCase();const lim=num(S.ten?.creditLimit)||5000,now=Date.now();
+  $('#ul').innerHTML=S.custs.filter(c=>num(c.due)>0&&((c.name||'').toLowerCase().includes(v)||(c.phone||'').includes(v))).sort((a,b)=>b.due-a.due).map(c=>{const old=c.lastDue&&now-c.lastDue>2592e6,hi=c.due>lim;return`<div class=pick style="align-items:center"><span>${esc(c.name)}<br><span class=mut>${esc(c.phone||'')}${old?' · ⏰ '+t('over'):''}${hi?' · ⚠ '+t('limit'):''}</span></span><b class="${old||hi?'bad':''}">${rs(c.due)}</b><button class="s alt" onclick="recv('${c.id}')">${t('recv')}</button></div>`}).join('')||'—'};
+window.recv=id=>{const c=S.custs.find(c=>c.id==id),a=num(prompt(t('recv')+' ('+c.name+')',c.due));if(!a)return;once('rv',async()=>{const w=writeBatch(db);w.update(td('customers',id),{due:increment(-a)});w.set(doc(tc('payments')),{cust:id,amt:a,ts:Date.now(),by:S.u.name||''});await W(w.commit())})};
+
+// ── REPORTS ──
+function vRep(){const d=s=>new Date(s).toISOString().slice(0,10);S.from=S.from||d(Date.now());S.to=S.to||d(Date.now());
+  const a=new Date(S.from+'T00:00:00').getTime(),b=new Date(S.to+'T23:59:59').getTime(),L=S.bills.filter(x=>x.ts>=a&&x.ts<=b),sum=k=>L.reduce((s,x)=>s+num(x[k]),0);
+  const profit=L.reduce((s,x)=>s+x.items.reduce((p,i)=>p+i.qty*(i.price-num((S.prods.find(q=>q.id==i.id)||{}).cost)),0),0);
+  $('#m').innerHTML=`<div class=card><div class=row><input type=date value="${S.from}" onchange="S2.from=this.value;go('rep')"><input type=date value="${S.to}" onchange="S2.to=this.value;go('rep')"></div><h3>${t('sales')}: ${rs(sum('total'))} · ${L.length} ${t('bills')}</h3><div class=mut>${t('paid')}: ${rs(sum('paid'))} · ${t('due')}: ${rs(sum('due'))}${S.u.role=='owner'?' · ±'+rs(profit):''}</div><br><button class=ghost onclick="csv()">${t('csv')}</button></div><div class=card>${L.map(x=>`<div class=pick onclick="showBill(S2.bills.find(b=>b.id=='${x.id}'))"><span>#${x.no}<br><span class=mut>${esc(x.cust?.name||'')} ${new Date(x.ts).toLocaleTimeString()}</span></span><b>${rs(x.total)}</b></div>`).join('')}</div>`;window._L=L}
+window.showBill=showBill;
+window.csv=()=>{const r=[['No','Date','Shop','Customer','Phone','Total','Paid','Due']].concat((window._L||[]).map(x=>[x.no,new Date(x.ts).toLocaleString(),x.shopName,x.cust?.name||'',x.cust?.phone||'',x.total,x.paid,x.due]));const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+r.map(l=>l.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n')],{type:'text/csv'}));a.download='bills.csv';a.click()};
+
+// ── SETTINGS (owner): store info, shops, shopkeepers ──
+function vSet(){const T=S.ten;$('#m').innerHTML=`<div class=card><input id=sn value="${esc(T.name)}" placeholder="${t('tname')}"><input id=sa value="${esc(T.address||'')}" placeholder="${t('addr')}"><div class=row><input id=sp value="${esc(T.phone||'')}" placeholder="${t('phone')}"><input id=sl type=number value="${T.creditLimit||5000}" placeholder="${t('credit')}"></div><button onclick="saveT()" style="width:100%">${t('save')}</button></div>
+  <div class=card><b>${t('shop')}</b>${(T.shops||[]).map(s=>`<div class=pick>${esc(s.name)}</div>`).join('')}<div class=row><input id=shn placeholder="${t('shop')}"><button class=s onclick="addShop()">${t('add')}</button></div></div>
+  <div class=card><b>${t('staff')}</b><input id=se type=email placeholder="${t('email')}"><input id=sw type=password placeholder="${t('pw')}"><input id=sm placeholder="${t('name')}"><select id=ss>${(T.shops||[]).map(s=>`<option value="${s.id}">${esc(s.name)}</option>`).join('')}</select><button onclick="addStaff()" style="width:100%">${t('add')}</button></div>`}
+window.saveT=()=>once('st',()=>W(updateDoc(doc(db,'tenants',S.tid),{name:$('#sn').value,address:$('#sa').value,phone:$('#sp').value,creditLimit:num($('#sl').value)})));
+window.addShop=()=>{const n=$('#shn').value.trim();if(n)once('sh',()=>W(updateDoc(doc(db,'tenants',S.tid),{shops:[...(S.ten.shops||[]),{id:'s'+Date.now().toString(36),name:n}]})))};
+// Create an auth user WITHOUT signing out the current user (secondary app instance).
+async function mkUser(email,pw,prof){const a2=initializeApp(cfg,'x'+Date.now()),au=getAuth(a2);try{const c=await withTimeout(createUserWithEmailAndPassword(au,email,pw),12000);await withTimeout(setDoc(doc(db,'users',c.user.uid),prof),12000)}finally{deleteApp(a2)}}
+window.addStaff=()=>once('as2',async()=>{if(!navigator.onLine)return toast('Online needed');await mkUser($('#se').value.trim(),$('#sw').value,{role:'cashier',tenantId:S.tid,shopId:$('#ss').value,name:$('#sm').value});toast(t('ok'))});
+
+// ── SUPER ADMIN: tenants ──
+function vTenants(){$('#m').innerHTML=`<div class=card><b>${t('newst')}</b><input id=tn placeholder="${t('tname')}"><input id=on placeholder="${t('oname')}"><input id=oe type=email placeholder="${t('email')}"><input id=op type=password placeholder="${t('pw')} (6+)"><label class=mut>${t('logo')}</label><input id=lf type=file accept="image/*"><button onclick="addTenant()" style="width:100%">${t('add')}</button></div>
+  <div class=card><div class=row><input id=mv type=number placeholder="${t('minv')}" value="${S.minV||''}"><button class=s onclick="setMin()">${t('save')}</button></div></div>
+  ${S.tenants.map(x=>`<div class=card><div class=row>${x.logo?`<img src="${x.logo}" style="width:36px;height:36px;border-radius:8px;flex:0 0 36px">`:''}<b>${esc(x.name)}</b></div>${['active','stock','udhaar','barcode'].map(k=>`<label style="margin-right:12px"><input type=checkbox style="width:auto" ${(k=='active'?x.active!==false:x.features?.[k]!==false)?'checked':''} onchange="tog('${x.id}','${k}',this.checked)"> ${k}</label>`).join('')}</div>`).join('')}`}
+const shrink=f=>new Promise(r=>{if(!f)return r('');const i=new Image();i.onload=()=>{const c=document.createElement('canvas'),k=Math.min(1,160/Math.max(i.width,i.height));c.width=i.width*k;c.height=i.height*k;c.getContext('2d').drawImage(i,0,0,c.width,c.height);r(c.toDataURL('image/jpeg',.75))};i.src=URL.createObjectURL(f)});
+window.addTenant=()=>once('at',async()=>{if(!navigator.onLine)return toast('Online needed');const n=$('#tn').value.trim();if(!n)return;const logo=await shrink($('#lf').files[0]),id=doc(collection(db,'tenants')).id;
+  await mkUser($('#oe').value.trim(),$('#op').value,{role:'owner',tenantId:id,name:$('#on').value});
+  await withTimeout(setDoc(doc(db,'tenants',id),{name:n,logo,active:true,features:{stock:true,udhaar:true,barcode:true},shops:[{id:'main',name:n}],creditLimit:5000,createdAt:Date.now()}),10000);toast(t('ok'));paint()});
+window.tog=(id,k,v)=>once('tg',()=>W(updateDoc(doc(db,'tenants',id),k=='active'?{active:v}:{['features.'+k]:v})));
+window.setMin=()=>once('mn',()=>W(setDoc(doc(db,'settings','appConfig'),{minVersion:num($('#mv').value)},{merge:true})));
+
+// ── PWA: real sw.js (blob: URLs are not allowed for service workers) ──
+if('serviceWorker'in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js?v='+APP_VERSION).catch(()=>{}));
+console.info('Kirana Bill v'+APP_VERSION);
+</script><script>
+// UI polish: theme toggle, online badge, ripple + haptics
+(()=>{const R=document.documentElement,sv=localStorage.theme;if(sv)R.dataset.theme=sv;
+const dark=()=>R.dataset.theme?R.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+const t=document.createElement('button');t.id='th';t.setAttribute('aria-label','Theme');const ic=()=>t.textContent=dark()?'☀️':'🌙';ic();
+t.onclick=()=>{const n=dark()?'light':'dark';R.dataset.theme=n;localStorage.theme=n;ic()};
+const n=document.createElement('div');n.id='net';const up=()=>{n.textContent=navigator.onLine?'● Online':'○ Offline';n.className=navigator.onLine?'':'off'};up();
+addEventListener('online',up);addEventListener('offline',up);document.body.append(t,n);
+document.addEventListener('pointerdown',e=>{const b=e.target.closest('button');if(!b||b.id=='th')return;navigator.vibrate&&navigator.vibrate(12);
+const r=b.getBoundingClientRect(),s=Math.max(r.width,r.height),d=document.createElement('span');d.className='rip';
+d.style.cssText=`width:${s}px;height:${s}px;left:${e.clientX-r.left-s/2}px;top:${e.clientY-r.top-s/2}px`;b.append(d);setTimeout(()=>d.remove(),600)});})();
+</script>
+</body></html>
